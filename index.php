@@ -43,7 +43,14 @@ bootstrap-theme.min.css">
 		
 		button {
 			margin-top:20px;
+			margin-bottom:20px;
+	
+		}
 		
+		.alert {
+			margin-top:30px;
+			display:none;
+			
 		}
 		
 	
@@ -69,13 +76,22 @@ bootstrap-theme.min.css">
 						<input type="text" class="form-control" name="city" id="city" placeholder="Eg. Warsaw, London, Paris.."/>
 					</div>
 					
-					<button class="btn btn-success btn-lg">Find my weather</button>
+					<button id="findMyWeather" class="btn btn-success btn-lg">Find my weather</button>
 					
 					
 				</form>
-	
+				
+					<div id="success" class="alert alert-success">Success!</div>
+					
+					<div id="fail" class="alert alert-danger">Could not find the weather data for that city. Try again</div>
+					
+					
+					<div id="noCity" class="alert alert-danger">Please enter a city</div>
+					
 				</div>
+				
 			</div>
+			
 		</div>
 
 
@@ -88,41 +104,37 @@ bootstrap-theme.min.css">
 
 		$("#findMyWeather").click(function(event) {
 
-			 event.preventDefault();
-
-			 $(".alert").hide();
-
-			 if ($("#city").val()!="") {
-
-				 $.get("scraper.php?city="+$("#city").val(),
-				function( data ) {
-
-
-
-
-				 if (data=="") {
-
-
-				 $("#fail").fadeIn();
-
-				 } else {
-
-
-				 $("#success").html(data).fadeIn();
-
-				 }
-
-
-				 });
-
-				 } else {
-
-					$("#noCity").fadeIn();
-
+			event.preventDefault();
+			
+			$(".alert").hide();
+			
+			if ($("#city").val()!="") {
+			
+			
+			$.get("scraper.php?city="+$("#city").val(), function d (data) {
+				
+				
+				if (data=="") {
+					
+					$("#fail").fadeIn();
+					
+				} else {
+					
+					$("#success").html(data).fadeIn();
+					
+					
 				}
-
-
-
+				
+				
+			});
+			
+		} else {
+			
+			$("#noCity").fadeIn();
+			
+		}
+			 
+			
 		 });
 </script>
 
