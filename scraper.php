@@ -6,9 +6,11 @@ $city=str_replace(" ","", $city);
 
 $contents=file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest");
 													// 	/s" multiline
-preg_match('/3 Day Weather Forecast Summary:<\/b>(.*?)<\/span></s', $contents,$matches);
+preg_match( '@<span class="phrase">(.*?)</span>@s', $contents, $matches);
 
 //preg_match('/3 Day Weather Forecast Summary:<\/b>(.*?)Summary</s', $contents,$matches);
+
+//preg_match('/3 Day Weather Forecast Summary:<\/b><span class="read-more-small"><span class="read-more-content"> <span class=\"phrase\"> (.*?) </s', $contents, $matches);
 
 echo $matches[1];
 
